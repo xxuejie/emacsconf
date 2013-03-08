@@ -1,0 +1,69 @@
+[submodule ".emacs.d/lisps/ack-and-a-half"]
+	path = .emacs.d/lisps/ack-and-a-half
+	url = git://github.com/jhelwig/ack-and-a-half.git
+[submodule ".emacs.d/lisps/emacs-color-theme-solarized"]
+	path = .emacs.d/lisps/emacs-color-theme-solarized
+	url = git://github.com/sellout/emacs-color-theme-solarized.git
+[submodule ".emacs.d/lisps/yasnippet"]
+	path = .emacs.d/lisps/yasnippet
+	url = git://github.com/capitaomorte/yasnippet.git
+[submodule ".emacs.d/lisps/code-imports"]
+	path = .emacs.d/lisps/code-imports
+	url = git://github.com/ahyatt/code-imports.git
+[submodule ".emacs.d/lisps/lua-mode"]
+	path = .emacs.d/lisps/lua-mode
+	url = git://github.com/immerrr/lua-mode.git
+[submodule ".emacs.d/lisps/zencoding"]
+	path = .emacs.d/lisps/zencoding
+	url = git://github.com/rooney/zencoding.git
+[submodule ".emacs.d/lisps/lusty-emacs"]
+	path = .emacs.d/lisps/lusty-emacs
+	url = git://github.com/sjbach/lusty-emacs.git
+[submodule ".emacs.d/lisps/yasnippet-snippets"]
+	path = .emacs.d/lisps/yasnippet-snippets
+	url = git://github.com/xxuejie/yasnippet-snippets.git
+[submodule ".emacs.d/lisps/web-mode"]
+	path = .emacs.d/lisps/web-mode
+	url = git://github.com/fxbois/web-mode.git
+[submodule ".emacs.d/lisps/clojure-mode"]
+	path = .emacs.d/lisps/clojure-mode
+	url = git://github.com/technomancy/clojure-mode.git
+[submodule ".emacs.d/lisps/yaml-mode"]
+	path = .emacs.d/lisps/yaml-mode
+	url = git://github.com/yoshiki/yaml-mode.git
+[submodule ".emacs.d/lisps/coffee-mode"]
+	path = .emacs.d/lisps/coffee-mode
+	url = git://github.com/defunkt/coffee-mode.git
+[submodule ".emacs.d/lisps/haml-mode"]
+	path = .emacs.d/lisps/haml-mode
+	url = git://github.com/nex3/haml-mode.git
+[submodule ".emacs.d/lisps/sass-mode"]
+	path = .emacs.d/lisps/sass-mode
+	url = git://github.com/nex3/sass-mode.git
+[submodule ".emacs.d/lisps/scss-mode"]
+	path = .emacs.d/lisps/scss-mode
+	url = git://github.com/antonj/scss-mode.git
+[submodule ".emacs.d/lisps/less-css-mode"]
+	path = .emacs.d/lisps/less-css-mode
+	url = git://github.com/purcell/less-css-mode.git
+[submodule ".emacs.d/lisps/ace-jump-mode"]
+	path = .emacs.d/lisps/ace-jump-mode
+	url = git://github.com/winterTTr/ace-jump-mode.git
+[submodule ".emacs.d/lisps/javadoc-lookup"]
+	path = .emacs.d/lisps/javadoc-lookup
+	url = git://github.com/skeeto/javadoc-lookup.git
+[submodule ".emacs.d/lisps/emacs-slim"]
+	path = .emacs.d/lisps/emacs-slim
+	url = git://github.com/slim-template/emacs-slim.git
+[submodule ".emacs.d/lisps/highlight-indent"]
+	path = .emacs.d/lisps/highlight-indent
+	url = git://github.com/antonj/Highlight-Indentation-for-Emacs.git
+[submodule ".emacs.d/lisps/handlebars-mode"]
+	path = .emacs.d/lisps/handlebars-mode
+	url = git://github.com/danielevans/handlebars-mode.git
+[submodule ".emacs.d/lisps/markdown-mode"]
+	path = .emacs.d/lisps/markdown-mode
+	url = git://github.com/defunkt/markdown-mode.git
+[submodule ".emacs.d/lisps/rainbow-delimiters"]
+	path = .emacs.d/lisps/rainbow-delimiters
+	url = git://github.com/jlr/rainbow-delimiters.git
