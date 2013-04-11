@@ -275,11 +275,8 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (add-hook 'scheme-mode-hook           'paredit-with-rainbow-hook)
 (add-hook 'clojure-mode-hook          'paredit-with-rainbow-hook)
 
-;; autopair mode
-(require 'autopair)
-(add-hook 'c-mode-common-hook #'(lambda () (autopair-mode)))
-(add-hook 'python-mode-hook #'(lambda () (autopair-mode)))
-(add-hook 'ruby-mode-hook #'(lambda () (autopair-mode)))
+;; electric pair mode is enough for non-lisp code
+(electric-pair-mode +1)
 
 ;; custom variables
 (custom-set-variables
@@ -288,6 +285,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ack-and-a-half-prompt-for-directory t)
+ '(custom-safe-themes (quote ("1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
  '(js-indent-level 2)
  '(scss-compile-at-save nil)
  '(show-trailing-whitespace t)
@@ -422,8 +420,8 @@ directory, select directory. Lastly the file is opened."
   (require 'go-mode-load)
 
   ;; pbcopy
-  ;; (require 'pbcopy)
-  ;; (turn-on-pbcopy)
+  (require 'pbcopy)
+  (turn-on-pbcopy)
   )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
