@@ -74,6 +74,14 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (global-set-key (kbd "C-x <up>")    'windmove-up)
 (global-set-key (kbd "C-x <down>")  'windmove-down)
 
+;; by default, kill the whole line
+(defun smart-kill-whole-line (&optional arg)
+  "A simple wrapper around `kill-whole-line' that respects indentation."
+  (interactive "P")
+  (kill-whole-line arg)
+  (back-to-indentation))
+(global-set-key (kbd "C-k") 'smart-kill-whole-line)
+
 ;; use current line when no text is selected
 (put 'kill-ring-save 'interactive-form
      '(interactive
@@ -277,6 +285,8 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 ;; electric pair mode is enough for non-lisp code
 (electric-pair-mode +1)
+
+(electric-indent-mode +1)
 
 ;; custom variables
 (custom-set-variables
