@@ -23,7 +23,8 @@
                                        "highlight-indent"
                                        "handlebars-mode"
                                        "markdown-mode"
-                                       "rainbow-delimiters")))
+                                       "rainbow-delimiters"
+                                       "multiple-cursors")))
 
 ;; ido mode
 (require 'ido)
@@ -65,6 +66,9 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 ;; which function mode
 (which-function-mode t)
+
+;; use C-t for selection
+(global-set-key (kbd "C-t") 'set-mark-command)
 
 (require 'highlight-indentation)
 
@@ -139,6 +143,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 ;; ace jump mode
 (require 'ace-jump-mode)
 (define-key global-map (kbd "C-c SPC") 'ace-jump-char-mode)
+(define-key global-map (kbd "M-t") 'ace-jump-char-mode)
 
 ;; ack-and-a-half
 (autoload 'ack-and-a-half-same "ack-and-a-half" nil t)
@@ -394,6 +399,12 @@ directory, select directory. Lastly the file is opened."
 
 ;; mustache mode
 (require 'mustache-mode)
+
+;; multiple cursors mode
+(require 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "M-m") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-c C-m") 'mc/mark-all-like-this)
 
 ;; TODO: currently, the following setup only works with mac
 (when (equal system-type 'darwin)

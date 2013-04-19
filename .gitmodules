@@ -67,3 +67,6 @@
 [submodule ".emacs.d/lisps/rainbow-delimiters"]
 	path = .emacs.d/lisps/rainbow-delimiters
 	url = git://github.com/jlr/rainbow-delimiters.git
+[submodule ".emacs.d/lisps/multiple-cursors"]
+	path = .emacs.d/lisps/multiple-cursors
+	url = git://github.com/magnars/multiple-cursors.el.git
