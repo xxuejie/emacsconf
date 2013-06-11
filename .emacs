@@ -48,9 +48,8 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 ;; set default indent to 2 spaces
 (setq standard-indent 2)
-
-;; set tab size to 4 spaces for dealing with windows-related projects
-(setq-default tab-width 4)
+(setq css-indent-offset 2)
+(setq sgml-basic-offset 2)
 
 ;; no scroll bars, menu bars, tool bars
 (scroll-bar-mode -1)
@@ -84,7 +83,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
   (interactive "P")
   (kill-whole-line arg)
   (back-to-indentation))
-(global-set-key (kbd "C-k") 'smart-kill-whole-line)
+(global-set-key (kbd "C-M-k") 'smart-kill-whole-line)
 
 ;; use current line when no text is selected
 (put 'kill-ring-save 'interactive-form
@@ -293,6 +292,8 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 (electric-indent-mode +1)
 
+(delete-selection-mode +1)
+
 ;; custom variables
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -400,6 +401,9 @@ directory, select directory. Lastly the file is opened."
 ;; mustache mode
 (require 'mustache-mode)
 
+;; mote mode
+(add-to-list 'auto-mode-alist '("\\.mote\\'" . html-mode))
+
 ;; multiple cursors mode
 (require 'multiple-cursors)
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
@@ -443,6 +447,10 @@ directory, select directory. Lastly the file is opened."
   ;; pbcopy
   (require 'pbcopy)
   (turn-on-pbcopy)
+
+  ;; magit
+  (require 'magit)
+  (global-set-key (kbd "C-x g") 'magit-status)
   )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
