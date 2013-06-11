@@ -9,7 +9,6 @@
                                        "code-imports"
                                        "lua-mode"
                                        "zencoding"
-                                       "lusty-emacs"
                                        "web-mode"
                                        "yaml-mode"
                                        "coffee-mode"
@@ -20,8 +19,6 @@
                                        "scss-mode"
                                        "ace-jump-mode"
                                        "javadoc-lookup"
-                                       "highlight-indent"
-                                       "handlebars-mode"
                                        "markdown-mode"
                                        "rainbow-delimiters"
                                        "multiple-cursors")))
@@ -68,8 +65,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 ;; use C-t for selection
 (global-set-key (kbd "C-t") 'set-mark-command)
-
-(require 'highlight-indentation)
 
 ;; windmove
 (global-set-key (kbd "C-x <left>")  'windmove-left)
@@ -122,13 +117,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 ;; stores auto save files in temp directory
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
-
-;; ;; color theme
-;; (require 'color-theme)
-;; (color-theme-initialize)
-
-;; (require 'color-theme-solarized)
-;; (color-theme-solarized-dark)
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/lisps/emacs-color-theme-solarized")
 (load-theme 'solarized-dark t)
@@ -190,32 +178,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (defun google-c-style-hook()
   (google-set-c-style)
   (c-set-style "google"))
-
-;; add microsoft c style
-(c-add-style "microsoft"
-             '("stroustrup"
-               (c-offsets-alist
-                (statement-cont . 0)
-                (innamespace . [4])
-                (inline-open . 0)
-                (inher-cont . c-lineup-multi-inher)
-                (arglist-cont-nonempty . +)
-                (template-args-cont . +))))
-
-;; match c styles according to directory
-(setq c-style-variables-are-local-p t)
-
-(defun microsoft-c-style-hook ()
-  (c-set-style "microsoft")
-  (make-local-variable 'indent-tabs-mode)
-  (setq indent-tabs-mode t))
-
-(defun per-project-c-style-mode-hook ()
-  (let ((bname (buffer-file-name)))
-    (cond
-     ((string-match "clreflect" bname) (microsoft-c-style-hook))
-     (t (google-c-style-hook)))))
-(add-hook 'c-mode-common-hook 'per-project-c-style-mode-hook)
+(add-hook 'c-mode-common-hook 'google-c-style-hook)
 
 ;; find closed makefile
 (defun upward-find-file (filename &optional startdir)
@@ -257,16 +220,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
 
-;; cmake mode
-(require 'cmake-mode)
-(setq auto-mode-alist
-      (append '(("CMakeLists\\.txt\\'" . cmake-mode)
-                ("\\.cmake\\'" . cmake-mode))
-              auto-mode-alist))
-
-;; uses python mode for pidbile
-(add-to-list 'auto-mode-alist '("\\.pibfile$" . python-mode))
-
 ;; ruby files
 (add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Rakefile" . ruby-mode))
@@ -289,9 +242,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 ;; electric pair mode is enough for non-lisp code
 (electric-pair-mode +1)
-
 (electric-indent-mode +1)
-
 (delete-selection-mode +1)
 
 ;; custom variables
@@ -347,15 +298,6 @@ directory, select directory. Lastly the file is opened."
 (add-hook 'sgml-mode-hook 'zencoding-mode)
 (add-hook 'web-mode-hook 'zencoding-mode)
 
-;; lusty explorer
-(require 'lusty-explorer)
-(global-set-key (kbd "C-x C-f") 'lusty-file-explorer)
-(global-set-key (kbd "C-x b") 'lusty-buffer-explorer)
-(defun my-lusty-hook ()
-  (define-key lusty-mode-map (kbd "RET") 'lusty-select-match)
-  (define-key lusty-mode-map "\C-o" 'lusty-open-this))
-(add-hook 'lusty-setup-hook 'my-lusty-hook)
-
 ;; web mode
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.phtml$" . web-mode))
@@ -393,13 +335,6 @@ directory, select directory. Lastly the file is opened."
 
 ;; less css mode
 (require 'less-css-mode)
-
-;; handlebars mode
-(require 'handlebars-mode)
-(add-hook 'handlebars-mode-hook 'zencoding-mode)
-
-;; mustache mode
-(require 'mustache-mode)
 
 ;; mote mode
 (add-to-list 'auto-mode-alist '("\\.mote\\'" . html-mode))

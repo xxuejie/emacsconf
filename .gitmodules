@@ -16,9 +16,6 @@
 [submodule ".emacs.d/lisps/zencoding"]
 	path = .emacs.d/lisps/zencoding
 	url = git://github.com/rooney/zencoding.git
-[submodule ".emacs.d/lisps/lusty-emacs"]
-	path = .emacs.d/lisps/lusty-emacs
-	url = git://github.com/sjbach/lusty-emacs.git
 [submodule ".emacs.d/lisps/yasnippet-snippets"]
 	path = .emacs.d/lisps/yasnippet-snippets
 	url = git://github.com/xxuejie/yasnippet-snippets.git
@@ -55,12 +52,6 @@
 [submodule ".emacs.d/lisps/emacs-slim"]
 	path = .emacs.d/lisps/emacs-slim
 	url = git://github.com/slim-template/emacs-slim.git
-[submodule ".emacs.d/lisps/highlight-indent"]
-	path = .emacs.d/lisps/highlight-indent
-	url = git://github.com/antonj/Highlight-Indentation-for-Emacs.git
-[submodule ".emacs.d/lisps/handlebars-mode"]
-	path = .emacs.d/lisps/handlebars-mode
-	url = git://github.com/danielevans/handlebars-mode.git
 [submodule ".emacs.d/lisps/markdown-mode"]
 	path = .emacs.d/lisps/markdown-mode
 	url = git://github.com/defunkt/markdown-mode.git
