@@ -1,7 +1,6 @@
 ;; recursively add load path
 (let ((default-directory "~/.emacs.d/lisps/"))
   (normal-top-level-add-to-load-path '("."
-                                       "color-theme-6.6.0"
                                        "emacs-color-theme-solarized"
                                        "clojure-mode"
                                        "ack-and-a-half"
@@ -20,7 +19,8 @@
                                        "javadoc-lookup"
                                        "markdown-mode"
                                        "rainbow-delimiters"
-                                       "multiple-cursors")))
+                                       "multiple-cursors"
+                                       "zencoding")))
 
 ;; ido mode
 (require 'ido)
@@ -289,6 +289,13 @@ directory, select directory. Lastly the file is opened."
 ;; "C-c f" here in case it conflicts with some app
 (global-set-key (kbd "C-c f") 'file-cache-ido-find-file)
 (global-set-key (kbd "M-p") 'file-cache-ido-find-file)
+
+;; zenconding
+(require 'zencoding-mode)
+(add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
+(add-hook 'web-mode-hook 'zencoding-mode)
+(add-hook 'css-mode-hook  'zencoding-mode) ;; enable Emmet's css abbreviation.
+(add-hook 'zencoding-mode-hook (lambda () (setq zencoding-indentation 2))) ;indent 2 spaces.
 
 ;; web mode
 (require 'web-mode)
