@@ -13,9 +13,6 @@
 [submodule ".emacs.d/lisps/lua-mode"]
 	path = .emacs.d/lisps/lua-mode
 	url = git://github.com/immerrr/lua-mode.git
-[submodule ".emacs.d/lisps/zencoding"]
-	path = .emacs.d/lisps/zencoding
-	url = git://github.com/rooney/zencoding.git
 [submodule ".emacs.d/lisps/yasnippet-snippets"]
 	path = .emacs.d/lisps/yasnippet-snippets
 	url = git://github.com/xxuejie/yasnippet-snippets.git

@@ -8,7 +8,6 @@
                                        "yasnippet"
                                        "code-imports"
                                        "lua-mode"
-                                       "zencoding"
                                        "web-mode"
                                        "yaml-mode"
                                        "coffee-mode"
@@ -129,8 +128,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 ;; ace jump mode
 (require 'ace-jump-mode)
-(define-key global-map (kbd "C-c SPC") 'ace-jump-char-mode)
-(define-key global-map (kbd "M-t") 'ace-jump-char-mode)
+(define-key global-map (kbd "C-o") 'ace-jump-char-mode)
 
 ;; ack-and-a-half
 (autoload 'ack-and-a-half-same "ack-and-a-half" nil t)
@@ -255,8 +253,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
  '(custom-safe-themes (quote ("1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
  '(js-indent-level 2)
  '(scss-compile-at-save nil)
- '(show-trailing-whitespace t)
- '(zencoding-indentation 2))
+ '(show-trailing-whitespace t))
 
 ;; java plugins
 (require 'javadoc-lookup)
@@ -292,11 +289,6 @@ directory, select directory. Lastly the file is opened."
 ;; "C-c f" here in case it conflicts with some app
 (global-set-key (kbd "C-c f") 'file-cache-ido-find-file)
 (global-set-key (kbd "M-p") 'file-cache-ido-find-file)
-
-;; zencoding
-(require 'zencoding-mode)
-(add-hook 'sgml-mode-hook 'zencoding-mode)
-(add-hook 'web-mode-hook 'zencoding-mode)
 
 ;; web mode
 (require 'web-mode)
