@@ -3,7 +3,6 @@
   (normal-top-level-add-to-load-path '("."
                                        "emacs-color-theme-solarized"
                                        "clojure-mode"
-                                       "ack-and-a-half"
                                        "yasnippet"
                                        "code-imports"
                                        "lua-mode"
@@ -20,7 +19,8 @@
                                        "markdown-mode"
                                        "rainbow-delimiters"
                                        "multiple-cursors"
-                                       "zencoding")))
+                                       "zencoding"
+                                       "ag")))
 
 ;; ido mode
 (require 'ido)
@@ -130,16 +130,8 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (require 'ace-jump-mode)
 (define-key global-map (kbd "C-o") 'ace-jump-char-mode)
 
-;; ack-and-a-half
-(autoload 'ack-and-a-half-same "ack-and-a-half" nil t)
-(autoload 'ack-and-a-half "ack-and-a-half" nil t)
-(autoload 'ack-and-a-half-find-file-same "ack-and-a-half" nil t)
-(autoload 'ack-and-a-half-find-file "ack-and-a-half" nil t)
-;;;; Create shorter aliases
-(defalias 'ack 'ack-and-a-half)
-(defalias 'ack-same 'ack-and-a-half-same)
-(defalias 'ack-find-file 'ack-and-a-half-find-file)
-(defalias 'ack-find-file-same 'ack-and-a-half-find-file-same)
+(require 'ag)
+(setq ag-highlight-search t)
 
 ;; yasnippet
 (require 'yasnippet)
@@ -240,7 +232,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 ;; electric pair mode is enough for non-lisp code
 (electric-pair-mode +1)
-(electric-indent-mode +1)
 (delete-selection-mode +1)
 
 ;; custom variables
@@ -249,8 +240,8 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ack-and-a-half-prompt-for-directory t)
- '(custom-safe-themes (quote ("1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
+ '(coffee-tab-width 2)
+ '(custom-safe-themes (quote ("fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
  '(js-indent-level 2)
  '(scss-compile-at-save nil)
  '(show-trailing-whitespace t))
@@ -303,6 +294,7 @@ directory, select directory. Lastly the file is opened."
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsp$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.erb$" . web-mode))
+(set-face-attribute 'web-mode-html-tag-face nil :foreground "gold")
 
 ;; yaml mode
 (require 'yaml-mode)

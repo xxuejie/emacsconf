@@ -1,6 +1,3 @@
-[submodule ".emacs.d/lisps/ack-and-a-half"]
-	path = .emacs.d/lisps/ack-and-a-half
-	url = git://github.com/jhelwig/ack-and-a-half.git
 [submodule ".emacs.d/lisps/emacs-color-theme-solarized"]
 	path = .emacs.d/lisps/emacs-color-theme-solarized
 	url = git://github.com/sellout/emacs-color-theme-solarized.git
@@ -58,3 +55,6 @@
 [submodule ".emacs.d/lisps/multiple-cursors"]
 	path = .emacs.d/lisps/multiple-cursors
 	url = git://github.com/magnars/multiple-cursors.el.git
+[submodule ".emacs.d/lisps/ag"]
+	path = .emacs.d/lisps/ag
+	url = https://github.com/Wilfred/ag.el.git
