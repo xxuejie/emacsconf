@@ -20,7 +20,8 @@
                                        "rainbow-delimiters"
                                        "multiple-cursors"
                                        "zencoding"
-                                       "ag")))
+                                       "ag"
+                                       "handlebars-mode")))
 
 ;; ido mode
 (require 'ido)
@@ -41,6 +42,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 ;; no tabs
 (setq-default indent-tabs-mode nil)
+(setq-default tab-width 2)
 
 ;; set default indent to 2 spaces
 (setq standard-indent 2)
@@ -64,6 +66,11 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 ;; use C-t for selection
 (global-set-key (kbd "C-t") 'set-mark-command)
+
+(require 'uniquify)
+
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(autoload 'ibuffer "ibuffer" "List buffers." t)
 
 ;; windmove
 (global-set-key (kbd "C-x <left>")  'windmove-left)
@@ -130,8 +137,10 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (require 'ace-jump-mode)
 (define-key global-map (kbd "C-o") 'ace-jump-char-mode)
 
+;; ag, also use ag to replace ack
 (require 'ag)
 (setq ag-highlight-search t)
+(defalias 'ack 'ag)
 
 ;; yasnippet
 (require 'yasnippet)
@@ -244,7 +253,8 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
  '(custom-safe-themes (quote ("fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
  '(js-indent-level 2)
  '(scss-compile-at-save nil)
- '(show-trailing-whitespace t))
+ '(show-trailing-whitespace t)
+ '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
 
 ;; java plugins
 (require 'javadoc-lookup)
@@ -286,6 +296,7 @@ directory, select directory. Lastly the file is opened."
 (add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
 (add-hook 'web-mode-hook 'zencoding-mode)
 (add-hook 'css-mode-hook  'zencoding-mode) ;; enable Emmet's css abbreviation.
+(add-hook 'handlebars-mode-hook 'zencoding-mode)
 (add-hook 'zencoding-mode-hook (lambda () (setq zencoding-indentation 2))) ;indent 2 spaces.
 
 ;; web mode
@@ -327,6 +338,9 @@ directory, select directory. Lastly the file is opened."
 ;; less css mode
 (require 'less-css-mode)
 
+;; handlebars mode
+(require 'handlebars-mode)
+
 ;; mote mode
 (add-to-list 'auto-mode-alist '("\\.mote\\'" . html-mode))
 
@@ -335,6 +349,16 @@ directory, select directory. Lastly the file is opened."
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 (global-set-key (kbd "M-m") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-c C-m") 'mc/mark-all-like-this)
+
+;; arduino
+(add-to-list 'auto-mode-alist '("\\.ino\\'" . c-mode))
+
+;; Rails
+(add-to-list 'auto-mode-alist '("\\.jbuilder\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.js.erb\\'" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.hbs.erb\\'" . handlebars-mode))
+
+(global-auto-revert-mode 1)
 
 ;; TODO: currently, the following setup only works with mac
 (when (equal system-type 'darwin)
@@ -366,9 +390,6 @@ directory, select directory. Lastly the file is opened."
   ;; (setq browse-url-browser-function '(("hyperspec" . w3m-browse-url)
   ;;                                     ("api" . w3m-browse-url)
   ;;                                     ("." . browse-url-default-macosx-browser)))
-  ;; go
-  (add-to-list 'load-path "/usr/local/go/misc/emacs")
-  (require 'go-mode-load)
 
   ;; pbcopy
   (require 'pbcopy)

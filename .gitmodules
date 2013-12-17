@@ -58,3 +58,6 @@
 [submodule ".emacs.d/lisps/ag"]
 	path = .emacs.d/lisps/ag
 	url = https://github.com/Wilfred/ag.el.git
+[submodule ".emacs.d/lisps/handlebars-mode"]
+	path = .emacs.d/lisps/handlebars-mode
+	url = https://github.com/danielevans/handlebars-mode.git
