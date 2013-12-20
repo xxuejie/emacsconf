@@ -176,7 +176,8 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (require 'google-c-style)
 (defun google-c-style-hook()
   (google-set-c-style)
-  (c-set-style "google"))
+  (c-set-style "google")
+  (c-set-offset 'inextern-lang 0))
 (add-hook 'c-mode-common-hook 'google-c-style-hook)
 
 ;; find closed makefile
