@@ -78,6 +78,19 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (global-set-key (kbd "C-x <up>")    'windmove-up)
 (global-set-key (kbd "C-x <down>")  'windmove-down)
 
+(unless window-system
+  (require 'mouse)
+  (xterm-mouse-mode t)
+  (global-set-key [mouse-4] '(lambda ()
+                              (interactive)
+                              (scroll-down 1)))
+  (global-set-key [mouse-5] '(lambda ()
+                              (interactive)
+                              (scroll-up 1)))
+  (defun track-mouse (e))
+  (setq mouse-sel-mode t)
+)
+
 ;; by default, kill the whole line
 (defun smart-kill-whole-line (&optional arg)
   "A simple wrapper around `kill-whole-line' that respects indentation."
@@ -357,6 +370,11 @@ directory, select directory. Lastly the file is opened."
 ;; mote mode
 (add-to-list 'auto-mode-alist '("\\.mote\\'" . html-mode))
 
+;; GLSL headers
+(add-to-list 'auto-mode-alist '("\\.glsl\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.vert\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.frag\\'" . c-mode))
+
 ;; multiple cursors mode
 (require 'multiple-cursors)
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
@@ -394,8 +412,8 @@ directory, select directory. Lastly the file is opened."
 
   ;; auctex
   ;; On mac, we install auctex via homebrew
-  (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
-  (require 'tex-site)
+  ;; (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
+  ;; (require 'tex-site)
 
   ;; ;; w3m
   ;; (add-to-list 'load-path "/Applications/Emacs.app/Contents/share/emacs/site-lisp/w3m")
@@ -411,6 +429,10 @@ directory, select directory. Lastly the file is opened."
   ;; magit
   (require 'magit)
   (global-set-key (kbd "C-x g") 'magit-status)
+
+  ;; go
+  (add-to-list 'load-path "/usr/local/Cellar/go/1.2/libexec/misc/emacs" t)
+  (require 'go-mode-load)
   )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
