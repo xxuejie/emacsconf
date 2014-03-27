@@ -1,7 +1,6 @@
 ;; recursively add load path
 (let ((default-directory "~/.emacs.d/lisps/"))
   (normal-top-level-add-to-load-path '("."
-                                       "emacs-color-theme-solarized"
                                        "clojure-mode"
                                        "code-imports"
                                        "lua-mode"
