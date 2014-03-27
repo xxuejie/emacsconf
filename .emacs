@@ -3,7 +3,6 @@
   (normal-top-level-add-to-load-path '("."
                                        "emacs-color-theme-solarized"
                                        "clojure-mode"
-                                       "yasnippet"
                                        "code-imports"
                                        "lua-mode"
                                        "web-mode"
@@ -154,11 +153,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (require 'ag)
 (setq ag-highlight-search t)
 (defalias 'ack 'ag)
-
-;; yasnippet
-(require 'yasnippet)
-(setq yas/snippet-dirs '("~/.emacs.d/snippets" "~/.emacs.d/lisps/yasnippet-snippets"))
-(yas/global-mode 1)
 
 ;; protobuf mode
 (require 'protobuf-mode)
