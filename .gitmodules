@@ -55,3 +55,6 @@
 [submodule ".emacs.d/lisps/handlebars-mode"]
 	path = .emacs.d/lisps/handlebars-mode
 	url = https://github.com/danielevans/handlebars-mode.git
+[submodule ".emacs.d/lisps/glsl-mode"]
+	path = .emacs.d/lisps/glsl-mode
+	url = https://github.com/jimhourihan/glsl-mode

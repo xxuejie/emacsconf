@@ -20,11 +20,13 @@
                                        "multiple-cursors"
                                        "zencoding"
                                        "ag"
-                                       "handlebars-mode")))
+                                       "handlebars-mode"
+                                       "glsl-mode")))
 
 ;; ido mode
 (require 'ido)
 (ido-mode t)
+(setq ido-auto-merge-work-directories-length -1)
 
 ;; fix exec-path on mac
 (defun set-exec-path-from-shell-PATH ()
@@ -77,18 +79,18 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (global-set-key (kbd "C-x <up>")    'windmove-up)
 (global-set-key (kbd "C-x <down>")  'windmove-down)
 
-(unless window-system
-  (require 'mouse)
-  (xterm-mouse-mode t)
-  (global-set-key [mouse-4] '(lambda ()
-                              (interactive)
-                              (scroll-down 1)))
-  (global-set-key [mouse-5] '(lambda ()
-                              (interactive)
-                              (scroll-up 1)))
-  (defun track-mouse (e))
-  (setq mouse-sel-mode t)
-)
+;; (unless window-system
+;;   (require 'mouse)
+;;   (xterm-mouse-mode t)
+;;   (global-set-key [mouse-4] '(lambda ()
+;;                               (interactive)
+;;                               (scroll-down 1)))
+;;   (global-set-key [mouse-5] '(lambda ()
+;;                               (interactive)
+;;                               (scroll-up 1)))
+;;   (defun track-mouse (e))
+;;   (setq mouse-sel-mode t)
+;; )
 
 ;; by default, kill the whole line
 (defun smart-kill-whole-line (&optional arg)
@@ -270,7 +272,7 @@ If you omit CLOSE, it will reuse OPEN."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(coffee-tab-width 2)
- '(custom-safe-themes (quote ("fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
+ '(custom-safe-themes (quote ("e697d31361bb4a0a2c15db5a18b2ff4b2bd256fbebc29fdc72deb802b505eb64" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
  '(js-indent-level 2)
  '(scss-compile-at-save nil)
  '(show-trailing-whitespace t)
@@ -364,10 +366,12 @@ directory, select directory. Lastly the file is opened."
 ;; mote mode
 (add-to-list 'auto-mode-alist '("\\.mote\\'" . html-mode))
 
-;; GLSL headers
-(add-to-list 'auto-mode-alist '("\\.glsl\\'" . c-mode))
-(add-to-list 'auto-mode-alist '("\\.vert\\'" . c-mode))
-(add-to-list 'auto-mode-alist '("\\.frag\\'" . c-mode))
+;; GLSL mode
+(autoload 'glsl-mode "glsl-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.glsl\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.vert\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.frag\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.geom\\'" . glsl-mode))
 
 ;; multiple cursors mode
 (require 'multiple-cursors)
@@ -384,6 +388,8 @@ directory, select directory. Lastly the file is opened."
 (add-to-list 'auto-mode-alist '("\\.hbs.erb\\'" . handlebars-mode))
 
 (global-auto-revert-mode 1)
+
+(require 'tempo-snippets)
 
 ;; TODO: currently, the following setup only works with mac
 (when (equal system-type 'darwin)
@@ -425,7 +431,7 @@ directory, select directory. Lastly the file is opened."
   (global-set-key (kbd "C-x g") 'magit-status)
 
   ;; go
-  (add-to-list 'load-path "/usr/local/Cellar/go/1.2/libexec/misc/emacs" t)
+  (add-to-list 'load-path "/usr/local/Cellar/go/1.2.1/libexec/misc/emacs" t)
   (require 'go-mode-load)
   )
 (custom-set-faces
