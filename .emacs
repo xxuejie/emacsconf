@@ -20,7 +20,8 @@
                                        "zencoding"
                                        "ag"
                                        "handlebars-mode"
-                                       "glsl-mode")))
+                                       "glsl-mode"
+                                       "editorconfig-emacs")))
 
 ;; ido mode
 (require 'ido)
@@ -390,6 +391,7 @@ directory, select directory. Lastly the file is opened."
 (global-auto-revert-mode 1)
 
 (require 'tempo-snippets)
+(load "editorconfig")
 
 ;; TODO: currently, the following setup only works with mac
 (when (equal system-type 'darwin)

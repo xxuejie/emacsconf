@@ -58,3 +58,6 @@
 [submodule ".emacs.d/lisps/glsl-mode"]
 	path = .emacs.d/lisps/glsl-mode
 	url = https://github.com/jimhourihan/glsl-mode
+[submodule ".emacs.d/lisps/editorconfig-emacs"]
+	path = .emacs.d/lisps/editorconfig-emacs
+	url = https://github.com/editorconfig/editorconfig-emacs
