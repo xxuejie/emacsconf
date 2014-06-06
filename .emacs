@@ -151,6 +151,12 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (require 'ace-jump-mode)
 (define-key global-map (kbd "C-o") 'ace-jump-char-mode)
 
+;; key chord mode
+(require 'key-chord)
+(key-chord-mode 1)
+(key-chord-define-global "jk" 'ace-jump-char-mode)
+
+
 ;; ag, also use ag to replace ack
 (require 'ag)
 (setq ag-highlight-search t)
@@ -390,7 +396,7 @@ directory, select directory. Lastly the file is opened."
 
 (global-auto-revert-mode 1)
 
-(require 'tempo-snippets)
+(require 'undo-tree)
 (load "editorconfig")
 
 ;; TODO: currently, the following setup only works with mac
