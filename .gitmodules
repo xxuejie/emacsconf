@@ -61,3 +61,6 @@
 [submodule ".emacs.d/lisps/editorconfig-emacs"]
 	path = .emacs.d/lisps/editorconfig-emacs
 	url = https://github.com/editorconfig/editorconfig-emacs
+[submodule ".emacs.d/lisps/emmet-mode"]
+	path = .emacs.d/lisps/emmet-mode
+	url = https://github.com/smihica/emmet-mode

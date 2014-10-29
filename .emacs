@@ -17,11 +17,19 @@
                                        "markdown-mode"
                                        "rainbow-delimiters"
                                        "multiple-cursors"
-                                       "zencoding"
+                                       "emmet-mode"
                                        "ag"
                                        "handlebars-mode"
                                        "glsl-mode"
                                        "editorconfig-emacs")))
+
+;; package mode
+;; Ideally, I should start migrating to ELPA, but that's a long
+;; process so I will take it gradually, as of now, the only package
+;; that is installed this way is magit
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 ;; ido mode
 (require 'ido)
@@ -72,6 +80,8 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
+
+(setq org-startup-folded nil )
 
 ;; windmove
 (global-set-key (kbd "C-x <left>")  'windmove-left)
@@ -321,12 +331,12 @@ directory, select directory. Lastly the file is opened."
 (global-set-key (kbd "M-p") 'file-cache-ido-find-file)
 
 ;; zenconding
-(require 'zencoding-mode)
-(add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
-(add-hook 'web-mode-hook 'zencoding-mode)
-(add-hook 'css-mode-hook  'zencoding-mode) ;; enable Emmet's css abbreviation.
-(add-hook 'handlebars-mode-hook 'zencoding-mode)
-(add-hook 'zencoding-mode-hook (lambda () (setq zencoding-indentation 2))) ;indent 2 spaces.
+(require 'emmet-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'web-mode-hook 'emmet-mode)
+(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+(add-hook 'handlebars-mode-hook 'emmet-mode)
+(add-hook 'emmet-mode-hook (lambda () (setq emmet-indentation 2))) ;indent 2 spaces.
 
 ;; web mode
 (require 'web-mode)
@@ -435,7 +445,7 @@ directory, select directory. Lastly the file is opened."
   (turn-on-pbcopy)
 
   ;; magit
-  (require 'magit)
+  ;; (require 'magit)
   (global-set-key (kbd "C-x g") 'magit-status)
 
   ;; go
