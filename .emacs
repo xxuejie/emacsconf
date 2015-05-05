@@ -1,7 +1,6 @@
 ;; recursively add load path
 (let ((default-directory "~/.emacs.d/lisps/"))
   (normal-top-level-add-to-load-path '("."
-                                       "clojure-mode"
                                        "code-imports"
                                        "lua-mode"
                                        "web-mode"
@@ -28,6 +27,7 @@
 ;; process so I will take it gradually, as of now, the only package
 ;; that is installed this way is magit
 (require 'package)
+(package-initialize)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
@@ -57,6 +57,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (setq standard-indent 2)
 (setq css-indent-offset 2)
 (setq sgml-basic-offset 2)
+(setq js-indent-level 2)
 
 ;; no scroll bars, menu bars, tool bars
 (scroll-bar-mode -1)
@@ -289,8 +290,11 @@ If you omit CLOSE, it will reuse OPEN."
  ;; If there is more than one, they won't work right.
  '(case-fold-search nil)
  '(coffee-tab-width 2)
- '(custom-safe-themes (quote ("e697d31361bb4a0a2c15db5a18b2ff4b2bd256fbebc29fdc72deb802b505eb64" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
+ '(custom-safe-themes
+   (quote
+    ("e697d31361bb4a0a2c15db5a18b2ff4b2bd256fbebc29fdc72deb802b505eb64" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
  '(js-indent-level 2)
+ '(require-final-newline t)
  '(scss-compile-at-save nil)
  '(show-trailing-whitespace t)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
@@ -325,6 +329,38 @@ directory, select directory. Lastly the file is opened."
            (setq ido-temp-list choices))))
     (ido-read-buffer prompt)))
 
+(defun find-next-unsafe-char (&optional coding-system)
+  "Find the next character in the buffer that cannot be encoded by
+coding-system. If coding-system is unspecified, default to the coding
+system that would be used to save this buffer. With prefix argument,
+prompt the user for a coding system."
+  (interactive "Zcoding-system: ")
+  (if (stringp coding-system) (setq coding-system (intern coding-system)))
+  (if coding-system nil
+    (setq coding-system
+          (or save-buffer-coding-system buffer-file-coding-system)))
+  (let ((found nil) (char nil) (csets nil) (safe nil))
+    (setq safe (coding-system-get coding-system 'safe-chars))
+    ;; some systems merely specify the charsets as ones they can encode:
+    (setq csets (coding-system-get coding-system 'safe-charsets))
+    (save-excursion
+      ;;(message "zoom to <")
+      (let ((end  (point-max))
+            (here (point))
+            (char  nil))
+        (while (and (< here end) (not found))
+          (setq char (char-after here))
+          (if (or (eq safe t)
+                  (< char ?\177)
+                  (and safe  (aref safe char))
+                  (and csets (memq (char-charset char) csets)))
+              nil ;; safe char, noop
+            (setq found (cons here char)))
+          (setq here (1+ here)))))
+    (and found (goto-char (1+ (car found))))
+    found))
+(global-set-key (kbd "M-s") 'find-next-unsafe-char)
+
 ;; Although "s-p" works on both Mac and Linux, we still put
 ;; "C-c f" here in case it conflicts with some app
 (global-set-key (kbd "C-c f") 'file-cache-ido-find-file)
@@ -334,7 +370,9 @@ directory, select directory. Lastly the file is opened."
 (require 'emmet-mode)
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
 (add-hook 'web-mode-hook 'emmet-mode)
-(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation
+(add-hook 'js-mode-hook 'emmet-mode)
+
 (add-hook 'handlebars-mode-hook 'emmet-mode)
 (add-hook 'emmet-mode-hook (lambda () (setq emmet-indentation 2))) ;indent 2 spaces.
 
@@ -458,3 +496,5 @@ directory, select directory. Lastly the file is opened."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(global-smartscan-mode 1)
