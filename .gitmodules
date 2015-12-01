@@ -4,9 +4,6 @@
 [submodule ".emacs.d/lisps/code-imports"]
 	path = .emacs.d/lisps/code-imports
 	url = git://github.com/ahyatt/code-imports.git
-[submodule ".emacs.d/lisps/lua-mode"]
-	path = .emacs.d/lisps/lua-mode
-	url = git://github.com/immerrr/lua-mode.git
 [submodule ".emacs.d/lisps/web-mode"]
 	path = .emacs.d/lisps/web-mode
 	url = git://github.com/fxbois/web-mode.git
