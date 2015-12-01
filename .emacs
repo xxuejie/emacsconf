@@ -2,8 +2,6 @@
 (let ((default-directory "~/.emacs.d/lisps/"))
   (normal-top-level-add-to-load-path '("."
                                        "code-imports"
-                                       "lua-mode"
-                                       "web-mode"
                                        "yaml-mode"
                                        "coffee-mode"
                                        "emacs-slim"
@@ -58,6 +56,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (setq css-indent-offset 2)
 (setq sgml-basic-offset 2)
 (setq js-indent-level 2)
+(setq lua-indent-level 2)
 
 ;; no scroll bars, menu bars, tool bars
 (scroll-bar-mode -1)
@@ -153,10 +152,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (load-theme 'solarized-dark t)
 
 ;; font setting
-(set-default-font "Dejavu Sans Mono for Powerline-14")
-
-;; clojure mode
-(require 'clojure-mode)
+(set-default-font "Monaco-15")
 
 ;; ace jump mode
 (require 'ace-jump-mode)
@@ -204,42 +200,12 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
   (google-set-c-style)
   (c-set-style "google")
   (c-set-offset 'inextern-lang 0))
-(add-hook 'c-mode-common-hook 'google-c-style-hook)
+(defun linux-c-style-hook ()
+  (setq c-default-style "linux"
+        indent-tabs-mode t
+        tab-width 8))
+(add-hook 'c-mode-common-hook 'linux-c-style-hook)
 
-;; find closed makefile
-(defun upward-find-file (filename &optional startdir)
-  "Move up directories until we find a certain filename. If we
-  manage to find it, return the containing directory. Else if we
-  get to the toplevel directory and still can't find it, return
-  nil. Start at startdir or . if startdir not given"
-
-  (let ((dirname (expand-file-name
-		  (if startdir startdir ".")))
-	(found nil) ; found is set as a flag to leave loop if we find it
-	(top nil))  ; top is set when we get
-		    ; to / so that we only check it once
-
-    ; While we've neither been at the top last time nor have we found
-    ; the file.
-    (while (not (or found top))
-      ; If we're at / set top flag.
-      (if (string= (expand-file-name dirname) "/")
-	  (setq top t))
-
-      ; Check for the file
-      (if (file-exists-p (expand-file-name filename dirname))
-	  (setq found t)
-	; If not, move up a directory
-	(setq dirname (expand-file-name ".." dirname))))
-    ; return statement
-    (if found dirname nil)))
-
-(defun compile-closest-makefile ()
-  (interactive)
-  (let* ((default-directory (or (upward-find-file "Makefile") "."))
-         (compile-command (concat "cd " default-directory " && "
-                                  compile-command)))
-    (compile compile-command)))
 
 (defun surround (begin end open close)
   "Put OPEN at START and CLOSE at END of the region.
@@ -253,15 +219,13 @@ If you omit CLOSE, it will reuse OPEN."
     (goto-char begin)
     (insert open)))
 
-;; lua mode
-(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
-(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
-(add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
-
 ;; ruby files
 (add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Rakefile" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
+
+;; well crystal and ruby look so much alike!
+(add-to-list 'auto-mode-alist '("\\.cr$" . ruby-mode))
 
 ;; paredit mode with rainbow delimiters for lisp files
 (defun paredit-with-rainbow-hook ()
@@ -276,7 +240,6 @@ If you omit CLOSE, it will reuse OPEN."
 (add-hook 'lisp-mode-hook             'paredit-with-rainbow-hook)
 (add-hook 'lisp-interaction-mode-hook 'paredit-with-rainbow-hook)
 (add-hook 'scheme-mode-hook           'paredit-with-rainbow-hook)
-(add-hook 'clojure-mode-hook          'paredit-with-rainbow-hook)
 
 ;; electric pair mode is enough for non-lisp code
 (electric-pair-mode +1)
@@ -382,6 +345,7 @@ prompt the user for a coding system."
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsp$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.erb$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
 (set-face-attribute 'web-mode-html-tag-face nil :foreground "gold")
 
 ;; yaml mode
@@ -449,34 +413,10 @@ prompt the user for a coding system."
 
 ;; TODO: currently, the following setup only works with mac
 (when (equal system-type 'darwin)
-
-  ;; ;; erlang
-  ;; (setq erlang-root-dir "/usr/local/Cellar/erlang/R15B02")
-  ;; (setq erlang-man-root-dir "/usr/local/Cellar/erlang/R15B02/share/man")
-
-  ;; ;; (add-to-list 'exec-path "/usr/local/Cellar/erlang/R15B02/bin")
-  ;; (add-to-list 'load-path "/usr/local/Cellar/erlang/R15B02/lib/erlang/lib/tools-2.6.8/emacs/")
-  ;; (require 'erlang-start)
-
-  ;; (add-to-list 'auto-mode-alist '("\\.erl?$" . erlang-mode))
-  ;; (add-to-list 'auto-mode-alist '("\\.hrl?$" . erlang-mode))
-
-  ;; ;; distel
-  ;; (add-to-list 'load-path "/usr/local/share/distel/elisp")
-  ;; (require 'distel)
-  ;; (distel-setup)
-
   ;; auctex
   ;; On mac, we install auctex via homebrew
   ;; (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
   ;; (require 'tex-site)
-
-  ;; ;; w3m
-  ;; (add-to-list 'load-path "/Applications/Emacs.app/Contents/share/emacs/site-lisp/w3m")
-  ;; (require 'w3m-load)
-  ;; (setq browse-url-browser-function '(("hyperspec" . w3m-browse-url)
-  ;;                                     ("api" . w3m-browse-url)
-  ;;                                     ("." . browse-url-default-macosx-browser)))
 
   ;; pbcopy
   (require 'pbcopy)
@@ -487,8 +427,11 @@ prompt the user for a coding system."
   (global-set-key (kbd "C-x g") 'magit-status)
 
   ;; go
-  (add-to-list 'load-path "/usr/local/Cellar/go/1.2.1/libexec/misc/emacs" t)
+  ;; (add-to-list 'load-path "/usr/local/Cellar/go/1.2.1/libexec/misc/emacs" t)
   (require 'go-mode-load)
+
+  (global-set-key "\C-cd" 'dash-at-point)
+  (global-set-key "\C-ce" 'dash-at-point-with-docset)
   )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
